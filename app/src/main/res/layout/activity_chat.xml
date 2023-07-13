@@ -16,10 +16,11 @@
         android:background="@color/bgColor">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/tvTitle"
+            android:id="@+id/tvTitleToolBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/black"
+            app:menu="@menu/main_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/clBottomBar"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle">
+            app:layout_constraintTop_toBottomOf="@id/tvTitleToolBar">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerMessages"

@@ -13,7 +13,9 @@ import com.varinder.scytale.common.SingleLiveEvent
 import com.varinder.scytale.roomDB.DBRepository
 import com.varinder.scytale.roomDB.entities.MessageEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -37,7 +39,7 @@ class ChatViewModel @Inject constructor(private val dbRepository: DBRepository) 
             )
         }
         if (messagesList.isEmpty()) {
-            DataHandler.ERROR(null, "LIST IS EMPTY OR NULL")
+            DataHandler.ERROR(null, "No Chat found")
         } else {
             DataHandler.SUCCESS(messagesList)
         }
@@ -71,7 +73,11 @@ class ChatViewModel @Inject constructor(private val dbRepository: DBRepository) 
 
     fun deleteAllMessages() {
         viewModelScope.launch {
-            dbRepository.deleteAll()
+            withContext(Dispatchers.IO)
+            {
+                dbRepository.deleteAll()
+            }
+
         }
     }
 

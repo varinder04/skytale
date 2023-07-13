@@ -17,6 +17,7 @@ import com.varinder.scytale.common.encryptAES
 import com.varinder.scytale.common.showNegativeAlerter
 import com.varinder.scytale.databinding.ActivityChatBinding
 import com.varinder.scytale.roomDB.entities.MessageEntity
+import com.varinder.scytale.signUp.SignUpActivity
 import com.varinder.scytale.userInfo.UserInfoActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.crypto.SecretKey
@@ -41,7 +42,21 @@ class ChatActivity : BaseActivity(), OnClickListener {
 
     private fun onClickListener() {
         mBinding.btnSend.setOnClickListener(this)
+        mBinding.tvTitleToolBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.clearAll -> {
+                    viewModel.deleteAllMessages()
+                    SharedPrefModule().getPref(applicationContext).edit().clear().apply()
+                    startActivity(Intent(this, SignUpActivity::class.java))
+                    finish()
+                    true
+                }
+
+                else -> false
+            }
+        }
     }
+
 
     private fun observables() {
         viewModel.onItemClick.observe(this) {

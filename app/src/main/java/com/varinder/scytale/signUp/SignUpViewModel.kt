@@ -7,6 +7,7 @@ import com.varinder.scytale.common.ADDRESS
 import com.varinder.scytale.common.EMAIL
 import com.varinder.scytale.common.MOBILE_NO
 import com.varinder.scytale.common.NAME
+import com.varinder.scytale.common.PROFILE_IMAGE
 import com.varinder.scytale.common.SharedPrefModule
 import com.varinder.scytale.common.SingleLiveEvent
 import com.varinder.scytale.common.isValidEmail
@@ -23,6 +24,7 @@ class SignUpViewModel @Inject constructor(
 
     private var application = application
 
+    val image by lazy { ObservableField("") }
     val name by lazy { ObservableField("") }
     val mobileNo by lazy { ObservableField("") }
     val address by lazy { ObservableField("") }
@@ -31,6 +33,11 @@ class SignUpViewModel @Inject constructor(
     var onError = SingleLiveEvent<String>()
 
     fun onSignUpClick() {
+
+        if (!isValidName(image.get() ?: "")) {
+            onError.value = "Please select profile image"
+            return
+        }
 
         if (!isValidName(name.get() ?: "")) {
             onError.value = "Please enter valid Name"
@@ -48,6 +55,8 @@ class SignUpViewModel @Inject constructor(
             onError.value = "Please enter valid Email"
             return
         } else {
+            sharedPrefModule.getPref(application.applicationContext).edit()
+                .putString(PROFILE_IMAGE, image.get()).apply()
             sharedPrefModule.getPref(application.applicationContext).edit()
                 .putString(NAME, name.get()).apply()
             sharedPrefModule.getPref(application.applicationContext).edit()

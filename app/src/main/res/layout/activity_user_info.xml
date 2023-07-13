@@ -3,6 +3,9 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.varinder.scytale.userInfo.UserInfoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -41,6 +44,7 @@
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="@dimen/_100sdp"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -64,6 +68,7 @@
                         android:enabled="false"
                         android:focusable="false"
                         android:inputType="textPersonName"
+                        android:text="@={vm.name}"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12ssp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -85,6 +90,7 @@
                         android:enabled="false"
                         android:focusable="false"
                         android:inputType="phone"
+                        android:text="@={vm.mobileNo}"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12ssp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -106,6 +112,7 @@
                         android:enabled="false"
                         android:focusable="false"
                         android:inputType="textPostalAddress"
+                        android:text="@={vm.address}"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12ssp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -127,6 +134,7 @@
                         android:enabled="false"
                         android:focusable="false"
                         android:inputType="textEmailAddress"
+                        android:text="@={vm.email}"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12ssp" />
                 </com.google.android.material.textfield.TextInputLayout>

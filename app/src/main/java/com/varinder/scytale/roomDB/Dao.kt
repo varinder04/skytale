@@ -32,6 +32,6 @@ interface Dao {
     fun deleteAll()
 
     // below line is to read all the messages from our database.
-    @Query("SELECT * FROM Messages ORDER BY id ASC")
+    @Query("SELECT * FROM Messages")
     fun getAllMessages(): LiveData<List<MessageEntity>>
 }

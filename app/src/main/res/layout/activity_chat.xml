@@ -3,6 +3,9 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.varinder.scytale.chat.ChatViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -31,8 +34,10 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerMessages"
+                setRecyclerAdapter="@{vm.adapter}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:itemCount="20"
                 tools:listitem="@layout/list_item_message" />

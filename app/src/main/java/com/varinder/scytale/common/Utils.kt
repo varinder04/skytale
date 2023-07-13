@@ -2,6 +2,9 @@ package com.varinder.scytale.common
 
 import android.app.Activity
 import android.content.Context
+import android.database.Cursor
+import android.net.Uri
+import android.provider.MediaStore
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -28,4 +31,17 @@ fun Context.showNegativeAlerter(message: String) {
     snakbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
         .maxLines = 5
     snakbar.show()
+}
+
+fun getRealPathFromURI(context: Context, contentUri: Uri?): String? {
+    var cursor: Cursor? = null
+    return try {
+        val proj = arrayOf(MediaStore.Images.Media.DATA)
+        cursor = context.contentResolver.query(contentUri!!, proj, null, null, null)
+        val column_index = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        cursor.moveToFirst()
+        cursor.getString(column_index)
+    } finally {
+        cursor?.close()
+    }
 }
